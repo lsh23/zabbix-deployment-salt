@@ -1,1 +1,1 @@
-DBPassword : 1234
+DBPassword: 1234
