@@ -35,3 +35,13 @@ import_schema:
   mysql_query.run_file:
     - database: zabbix
     - query_file: /usr/share/doc/zabbix-server-mysql/create.sql
+
+zabbix-server:
+  file.managed:
+    - names:
+      - /etc/zabbix/zabbix_server.conf:
+        - source: salt://zabbix-server/conf/zabbix_server.conf
+    - template: jinja
+  service.running:
+    - watch:
+      - file: /etc/zabbix/zabbix_server.conf
