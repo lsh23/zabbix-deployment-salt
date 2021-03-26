@@ -1,0 +1,37 @@
+apiVersion: 1
+  
+datasources:
+- name: Zabbix
+  type: alexanderzobnin-zabbix-datasource
+  access: proxy
+  url: http://localhost/zabbix/api_jsonrpc.php
+  isDefault: true
+  jsonData:
+    # Zabbix API credentials
+    username: Admin
+    password: zabbix
+    # Trends options
+    trends: true
+    trendsFrom: "7d"
+    trendsRange: "4d"
+    # Cache update interval
+    cacheTTL: "1h"
+    # Alerting options
+    alerting: true
+    addThresholds: false
+    alertingMinSeverity: 3
+    # Direct DB Connection options
+    dbConnectionEnable: false
+    # Name of existing datasource for Direct DB Connection
+    dbConnectionDatasourceName:
+    # Retention policy name (InfluxDB only) for fetching long-term stored data.
+    # Leave it blank if only default retention policy used.
+    dbConnectionRetentionPolicy: one_year
+    # Disable acknowledges for read-only users
+    disableReadOnlyUsersAck: false
+    # Disable time series data alignment
+    disableDataAlignment: false
+    # Use value mapping from Zabbix
+    useZabbixValueMapping: true
+  version: 1
+  editable: false
