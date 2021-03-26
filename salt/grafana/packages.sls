@@ -31,7 +31,12 @@ grafana-server:
         - source: salt://grafana/conf/grafana.ini
       - /etc/grafana/provisioning/datasources/zabbix.yml:
         - source: salt://grafana/conf/zabbix.yml
+      - /etc/grafana/provisioning/dashboards/dashboard.yml:
+        - source: salt://grafana/conf/dashboard.yml
+      - /etc/dashboards/sehyeong_dashboard.json:
+        - source: salt://grafana/conf/dashboard_template.json  
     - template: jinja
+    - makedirs: True
   service.running:
     - watch:
-      - file: /etc/grafana/grafana.ini
+      - file: /etc/grafana/*
