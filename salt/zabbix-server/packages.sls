@@ -57,3 +57,31 @@ web_installation_skip:
       - /etc/zabbix/web/zabbix.conf.php:
         - source: salt://zabbix-server/conf/zabbix.conf.php
     - template: jinja
+
+zabbix-action-present:
+    zabbix_action.present:
+        - name: Auto Add Linux Hosts
+        - params:
+            eventsource: 2
+            status: 0
+            filter:
+                evaltype: 2
+                conditions:
+                    - conditiontype: 24
+                      operator: 2
+                      value: {{ pillar['HostMetadata'] }}
+            operations:
+                - operationtype: 2
+                - operationtype: 4
+                  opgroup:
+                      - groupid:
+                          query_object: hostgroup
+                          query_name: Linux servers
+                - operationtype: 6
+                  optemplate:
+                    - templateid:
+                        query_object: template
+                        query_name: Template OS Linux by Zabbix agent active
+        - _connection_user: {{ pillar['ZabbixUser'] }};
+        - _connection_password: {{ pillar['ZabbixPasswd'] }};
+        - _connection_url: http://localhost/zabbix/api_jsonrpc.php
