@@ -1,7 +1,8 @@
 base:
   '*':
     - common
-  'zabbix-server':
+  'server':
     - zabbix-server
-  'zabbix-agents':
+    - grafana
+  'agents':
     - zabbix-agent
