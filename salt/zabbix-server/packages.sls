@@ -82,6 +82,6 @@ zabbix-action-present:
                     - templateid:
                         query_object: template
                         query_name: Template OS Linux by Zabbix agent active
-        - _connection_user: {{ pillar['ZabbixUser'] }};
-        - _connection_password: {{ pillar['ZabbixPasswd'] }};
+        - _connection_user: {{ pillar['ZabbixUser'] }}
+        - _connection_password: {{ pillar['ZabbixPasswd'] }}
         - _connection_url: http://localhost/zabbix/api_jsonrpc.php
